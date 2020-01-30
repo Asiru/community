@@ -1,0 +1,14 @@
+points:
+  per-minute:
+    active: 3.6
+    afk: -0.12
+    offline: -0.12
+  login:
+    first: 1000
+    daily: 15
+  given:
+    commend: 100
+    punish: -100
+  on-vote: 25
+  on-kick: -1000
+  on-ban: -10000
