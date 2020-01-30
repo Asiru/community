@@ -4,6 +4,7 @@ import com.earth2me.essentials.Essentials;
 import com.neo.community.config.Settings;
 import com.neo.community.config.database.PlayerDataStorage;
 import com.neo.community.hook.EssentialsHook;
+import com.neo.community.hook.VotifierHook;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ public final class Community extends JavaPlugin implements Listener {
 		essentialsHook = connectEssentials();
 		playerDataStorage = new PlayerDataStorage(this);
 		
+		registerListener(connectVotifier());
 		registerListener(playerDataStorage);
 		
 		playerDataStorage.startTimer();
@@ -31,14 +33,24 @@ public final class Community extends JavaPlugin implements Listener {
 	}
 	
 	private void registerListener(Listener listener) {
-		Bukkit.getPluginManager().registerEvents(listener, this);
+		if(listener != null) {
+			Bukkit.getPluginManager().registerEvents(listener, this);
+		}
 	}
 	
 	private EssentialsHook connectEssentials() {
 		if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
 			Essentials essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
-			if(essentials != null)
+			if(essentials != null) {
 				return new EssentialsHook(essentials);
+			}
+		}
+		return null;
+	}
+	
+	private VotifierHook connectVotifier() {
+		if(Bukkit.getPluginManager().isPluginEnabled("NuVotifier")) {
+			return new VotifierHook(this);
 		}
 		return null;
 	}
