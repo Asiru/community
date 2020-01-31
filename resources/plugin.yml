@@ -6,3 +6,25 @@ api-version: 1.13
 authors: [Neo]
 softdepend: [Essentials, NuVotifier]
 prefix: Community
+commands:
+  reward:
+    description: Reward a player with community points!
+  punish:
+    description: Remove a player's community points!
+permissions:
+  community.reward:
+    description: Allows a player to reward other players with the default amount of community points.
+  community.reward.bypass:
+    description: Allows a player to reward other players any number of community points.
+  community.reward.cooldown.bypass:
+    description: Allows a player to reward other players without waiting for the command cooldown.
+  community.reward.anonymous:
+    description: Allows a player to reward other players without displaying their name.
+  community.punish:
+    description: Allows a player to punish other players by removing the default amount of community points.
+  community.punish.bypass:
+    description: Allows a player to punish other players by removing any number of community points.
+  community.punish.cooldown.bypass:
+    description: Allows a player to punish other players without waiting for the command cooldown.
+  community.punish.anonymous:
+    description: Allows a player to punish other players without displaying their name.

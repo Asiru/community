@@ -18,6 +18,8 @@ public class Utils {
 	public static OfflinePlayer getPlayerFromUsername(String name) {
 		OfflinePlayer result = Bukkit.getPlayerExact(name);
 		if(result == null)
+			result = Bukkit.getPlayer(name);
+		if(result == null)
 			result = Bukkit.getOfflinePlayer(name);
 		if(result.hasPlayedBefore())
 			return result;

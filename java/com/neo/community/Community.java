@@ -1,15 +1,20 @@
 package com.neo.community;
 
 import com.earth2me.essentials.Essentials;
+import com.neo.community.command.PunishExecutor;
+import com.neo.community.command.RewardExecutor;
 import com.neo.community.config.Settings;
 import com.neo.community.config.database.PlayerDataStorage;
 import com.neo.community.hook.EssentialsHook;
 import com.neo.community.hook.VotifierHook;
 import org.bukkit.Bukkit;
+import org.bukkit.command.*;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Community extends JavaPlugin implements Listener {
+import java.util.logging.Level;
+
+public final class Community extends JavaPlugin {
 	private Settings settings;
 	private EssentialsHook essentialsHook;
 	private PlayerDataStorage playerDataStorage;
@@ -22,6 +27,9 @@ public final class Community extends JavaPlugin implements Listener {
 		
 		registerListener(connectVotifier());
 		registerListener(playerDataStorage);
+		
+		registerCommand("reward", new RewardExecutor(this));
+		registerCommand("punish", new PunishExecutor(this));
 		
 		playerDataStorage.startTimer();
 	}
@@ -36,6 +44,16 @@ public final class Community extends JavaPlugin implements Listener {
 		if(listener != null) {
 			Bukkit.getPluginManager().registerEvents(listener, this);
 		}
+	}
+	
+	private void registerCommand(String name, CommandExecutor executor) {
+		PluginCommand command = getCommand(name);
+		if(command != null) {
+			command.setExecutor(executor);
+			if(executor instanceof TabCompleter)
+				command.setTabCompleter((TabCompleter) executor);
+		} else
+			getLogger().log(Level.SEVERE, "Could not register command: /" + name);
 	}
 	
 	private EssentialsHook connectEssentials() {

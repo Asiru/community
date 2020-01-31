@@ -9,7 +9,7 @@ public final class Settings extends ConfigAccessor<Community> {
 			OFFLINE_PPM = "points.per-minute.offline",
 			FIRST_LOGIN_POINTS = "points.login.first",
 			DAILY_LOGIN_POINTS = "points.login.daily",
-			POINTS_COMMEND = "points.given.commend",
+			POINTS_REWARD = "points.given.reward",
 			POINTS_PUNISH = "points.given.punish",
 			POINTS_ON_VOTE = "points.on-vote",
 			POINTS_ON_KICK = "points.on-kick",
@@ -39,8 +39,8 @@ public final class Settings extends ConfigAccessor<Community> {
 		return config.getDouble(DAILY_LOGIN_POINTS, 15);
 	}
 	
-	public double getCommendPoints() {
-		return config.getDouble(POINTS_COMMEND, 100);
+	public double getRewardPoints() {
+		return config.getDouble(POINTS_REWARD, 100);
 	}
 	
 	public double getPunishPoints() {
