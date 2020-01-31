@@ -21,7 +21,7 @@ public class RewardExecutor extends CooldownManager<OfflinePlayer> implements Co
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			// TODO message for players only
+			// TODO error message for players only
 			return false;
 		}
 		Player player = (Player) sender;
@@ -36,15 +36,20 @@ public class RewardExecutor extends CooldownManager<OfflinePlayer> implements Co
 			
 			double points;
 			if(args.length >= 2) {
-				// check permission "community.reward.bypass"
 				try {
 					points = Double.valueOf(args[1]);
 				} catch(NumberFormatException ex) {
 					// TODO error message for invalid point value
 					return false;
 				}
+				// check permission "community.reward.bypass"
 			} else {
-				points = plugin.getSettings().getRewardPoints();
+				Double permissionValue = Utils.getPermissionValue(player, "community.reward");
+				if(permissionValue == null) {
+					points = plugin.getSettings().getRewardPoints();
+				} else {
+					points = permissionValue;
+				}
 			}
 			
 			// check permission "community.reward.cooldown.bypass"
@@ -55,7 +60,14 @@ public class RewardExecutor extends CooldownManager<OfflinePlayer> implements Co
 			
 			ScoreEntry scoreEntry = plugin.getPlayerDataStorage().get(target.getUniqueId().toString());
 			scoreEntry.setScore(scoreEntry.getScore() + points);
-			// TODO set cooldown
+			Double permissionValue = Utils.getPermissionValue(player, "community.reward.cooldown");
+			long cooldown;
+			if(permissionValue == null) {
+				cooldown = plugin.getSettings().getRewardCooldown();
+			} else {
+				cooldown = Math.round(permissionValue);
+			}
+			setCooldown(player, cooldown);
 			
 			// check permission "community.reward.anonymous"
 			// TODO success messages for sender and target

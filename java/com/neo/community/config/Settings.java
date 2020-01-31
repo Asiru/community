@@ -10,7 +10,9 @@ public final class Settings extends ConfigAccessor<Community> {
 			FIRST_LOGIN_POINTS = "points.login.first",
 			DAILY_LOGIN_POINTS = "points.login.daily",
 			POINTS_REWARD = "points.given.reward",
+			REWARD_COOLDOWN = "points.given.reward-cooldown",
 			POINTS_PUNISH = "points.given.punish",
+			PUNISH_COOLDOWN = "points.given.punish-cooldown",
 			POINTS_ON_VOTE = "points.on-vote",
 			POINTS_ON_KICK = "points.on-kick",
 			POINTS_ON_BAN = "points.on-ban";
@@ -43,8 +45,16 @@ public final class Settings extends ConfigAccessor<Community> {
 		return config.getDouble(POINTS_REWARD, 100);
 	}
 	
+	public long getRewardCooldown() {
+		return config.getLong(REWARD_COOLDOWN, 120);
+	}
+	
 	public double getPunishPoints() {
 		return config.getDouble(POINTS_PUNISH, -100);
+	}
+	
+	public long getPunishCooldown() {
+		return config.getLong(PUNISH_COOLDOWN, 120);
 	}
 	
 	public double getPointsOnVote() {

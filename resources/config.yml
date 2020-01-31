@@ -8,7 +8,9 @@ points:
     daily: 15
   given:
     reward: 100
+    reward-cooldown: 120
     punish: -100
+    punish-cooldown: 120
   on-vote: 25
   on-kick: -1000
   on-ban: -10000
