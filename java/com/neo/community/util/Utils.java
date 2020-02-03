@@ -3,6 +3,7 @@ package com.neo.community.util;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.time.LocalDate;
@@ -32,7 +33,7 @@ public class Utils {
 	}
 	
 	// Generic method for checking permissions regardless of op
-	public static Double getPermissionValue(Player p, String checkPermission) {
+	public static Double getPermissionValue(Permissible p, String checkPermission) {
 		if(p != null) {
 			for (PermissionAttachmentInfo pai : p.getEffectivePermissions()) {
 				String regex = "\\Q" + checkPermission + ".\\E";

@@ -1,11 +1,18 @@
 package com.neo.community.util;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public enum Message {
+	NO_PERMISSION("&cYou do not have permssion for %s."),
+	PLAYER_INVALID("&cCannot find player called \'%s\'."),
+	PLAYER_SELF("&cYou cannot target yourself."),
+	REWARD_COOLDOWN("&cYou cannot give another community reward for %s."),
+	REWARD_MESSAGE("&e%s &6has given you &e%d &6community points!"),
+	REWARD_ANONYMOUS("&6You have been given &e%d &6community points!"),
+	AMOUNT_INVALID("&c\'%s\' is not a valid point value."),
 	FIRST_LOGIN("&6You\'ve received &e%s &6points for joining the server!"),
 	DAILY_LOGIN("&6You\'ve received &e%s &6points for logging in today!");
 	
@@ -15,8 +22,8 @@ public enum Message {
 		this.message = message;
 	}
 	
-	public void send(Player p, Object... args) {
-		if(p == null) {
+	public void send(CommandSender sender, Object... args) {
+		if(sender == null) {
 			return;
 		}
 		
@@ -26,25 +33,25 @@ public enum Message {
 		}
 		msg = ChatColor.translateAlternateColorCodes('&', msg);
 		
-		p.sendMessage(msg);
+		sender.sendMessage(msg);
 	}
 	
-	public void sendDelayed(Plugin plugin, long delay, Player p, Object... args) {
-		new MessageRunnable(p, args).runTaskLater(plugin, delay);
+	public void sendDelayed(Plugin plugin, long delay, CommandSender sender, Object... args) {
+		new MessageRunnable(sender, args).runTaskLater(plugin, delay);
 	}
 	
 	private class MessageRunnable extends BukkitRunnable {
-		private Player p;
+		private CommandSender sender;
 		private Object[] args;
 		
-		private MessageRunnable(Player p, Object... args) {
-			this.p = p;
+		private MessageRunnable(CommandSender sender, Object... args) {
+			this.sender = sender;
 			this.args = args;
 		}
 		
 		@Override
 		public void run() {
-			send(p, args);
+			send(sender, args);
 		}
 	}
 }
