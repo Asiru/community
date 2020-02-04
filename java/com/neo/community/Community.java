@@ -7,6 +7,7 @@ import com.neo.community.config.Settings;
 import com.neo.community.config.database.PlayerDataStorage;
 import com.neo.community.hook.EssentialsHook;
 import com.neo.community.hook.VotifierHook;
+import com.neo.community.manager.PlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.event.Listener;
@@ -27,6 +28,7 @@ public final class Community extends JavaPlugin {
 		
 		registerListener(connectVotifier());
 		registerListener(playerDataStorage);
+		registerListener(new PlayerListener(this));
 		
 		registerCommand("reward", new RewardExecutor(this));
 		registerCommand("punish", new PunishExecutor(this));
