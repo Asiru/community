@@ -20,6 +20,13 @@ permissions:
     description: Allows a player to reward other players without waiting for the command cooldown.
   community.reward.anonymous:
     description: Allows a player to reward other players without displaying their name.
+  community.reward.*:
+    description: Allows unlimited use of the /reward command.
+    children:
+      community.reward: true
+      community.reward.bypass: true
+      community.reward.cooldown.bypass: true
+      community.reward.anonymous: true
   community.punish:
     description: Allows a player to punish other players by removing the default amount of community points.
   community.punish.bypass:
@@ -28,3 +35,15 @@ permissions:
     description: Allows a player to punish other players without waiting for the command cooldown.
   community.punish.anonymous:
     description: Allows a player to punish other players without displaying their name.
+  community.punish.*:
+    description: Allows unlimited use of the /punish command.
+    children:
+      community.punish: true
+      community.punish.bypass: true
+      community.punish.cooldown.bypass: true
+      community.punish.anonymous: true
+  community.*:
+    description: Allows usage of all Community commands.
+    children:
+      community.reward.*: true
+      community.punish.*: true

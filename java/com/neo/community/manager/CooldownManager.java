@@ -8,13 +8,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class CooldownManager<T> {
 	private final Map<T, Cooldown> cooldowns = new ConcurrentHashMap<>();
 	
-	public final long getCooldown(T object) {
+	protected final long getCooldown(T object) {
 		if(cooldowns.containsKey(object))
 			return cooldowns.get(object).cooldown;
 		return 0;
 	}
 	
-	public final void setCooldown(T object, long cooldown) {
+	protected final void setCooldown(T object, long cooldown) {
 		Cooldown c = cooldowns.get(object);
 		if(c == null) {
 			c = new Cooldown(object, cooldown);

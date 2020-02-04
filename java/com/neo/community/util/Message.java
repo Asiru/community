@@ -9,12 +9,15 @@ public enum Message {
 	NO_PERMISSION("&cYou do not have permssion for %s."),
 	PLAYER_INVALID("&cCannot find player called \'%s\'."),
 	PLAYER_SELF("&cYou cannot target yourself."),
+	PUNISH_COOLDOWN("&cYou cannot give another community punishment for %s."),
+	PUNISH_MESSAGE("&c%s &6has removed &c%d &6of your community points!"),
+	PUNISH_ANONYMOUS("&6You have lost &c%d &6community points!"),
 	REWARD_COOLDOWN("&cYou cannot give another community reward for %s."),
 	REWARD_MESSAGE("&e%s &6has given you &e%d &6community points!"),
 	REWARD_ANONYMOUS("&6You have been given &e%d &6community points!"),
 	AMOUNT_INVALID("&c\'%s\' is not a valid point value."),
-	FIRST_LOGIN("&6You\'ve received &e%s &6points for joining the server!"),
-	DAILY_LOGIN("&6You\'ve received &e%s &6points for logging in today!");
+	FIRST_LOGIN("&6You\'ve received &e%s &6community points for joining the server!"),
+	DAILY_LOGIN("&6You\'ve received &e%s &6community points for logging in today!");
 	
 	private String message;
 	

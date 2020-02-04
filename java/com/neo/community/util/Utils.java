@@ -44,4 +44,36 @@ public class Utils {
 		}
 		return null;
 	}
+	
+	public static String formatTime(long seconds) {
+		long days = seconds / 86400;
+		long hours = seconds / 3600;
+		long minutes = seconds / 60;
+		long remaining = seconds % 60;
+		
+		StringBuilder builder = new StringBuilder();
+		if(days > 0) {
+			builder.append(days);
+			builder.append(" day");
+			if(days != 1)
+				builder.append("s");
+		} else if(hours > 0) {
+			builder.append(hours);
+			builder.append(" hour");
+			if(hours != 1)
+				builder.append("s");
+		} else if(minutes > 0) {
+			builder.append(minutes);
+			builder.append(" minute");
+			if(minutes != 1)
+				builder.append("s");
+		} else {
+			builder.append(remaining);
+			builder.append(" second");
+			if(remaining != 1)
+				builder.append("s");
+		}
+		
+		return builder.toString();
+	}
 }
