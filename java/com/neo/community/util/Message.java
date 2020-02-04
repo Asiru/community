@@ -19,7 +19,10 @@ public enum Message {
 	REWARD_ANONYMOUS("&6You have been given &e%d &6community points!"),
 	AMOUNT_INVALID("&c\'%s\' is not a valid point value."),
 	FIRST_LOGIN("&6You\'ve received &e%s &6community points for joining the server!"),
-	DAILY_LOGIN("&6You\'ve received &e%s &6community points for logging in today!");
+	DAILY_LOGIN("&6You\'ve received &e%s &6community points for logging in today!"),
+	USAGE_COMMUNITY("&cUsage: /community [player]"),
+	USAGE_REWARD("&cUsage: /reward <player> [amount]"),
+	USAGE_PUNISH("&cUsage: /punish <player> [amount]");
 	
 	private String message;
 	

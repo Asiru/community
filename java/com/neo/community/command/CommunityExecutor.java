@@ -42,7 +42,7 @@ public class CommunityExecutor implements CommandExecutor {
 				return false;
 			}
 		} else {
-			// TODO help message
+			Message.USAGE_COMMUNITY.send(sender);
 			return false;
 		}
 		

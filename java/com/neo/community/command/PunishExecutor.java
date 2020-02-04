@@ -33,4 +33,9 @@ public class PunishExecutor extends PointExecutor {
 	protected void sendCooldownMessage(CommandSender sender, String formattedTime) {
 		Message.PUNISH_COOLDOWN.send(sender, formattedTime);
 	}
+	
+	@Override
+	protected void sendHelpMessage(CommandSender sender) {
+		Message.USAGE_PUNISH.send(sender);
+	}
 }

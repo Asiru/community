@@ -33,4 +33,9 @@ public class RewardExecutor extends PointExecutor {
 	protected void sendCooldownMessage(CommandSender sender, String formattedTime) {
 		Message.REWARD_COOLDOWN.send(sender, formattedTime);
 	}
+	
+	@Override
+	protected void sendHelpMessage(CommandSender sender) {
+		Message.USAGE_REWARD.send(sender);
+	}
 }

@@ -27,7 +27,7 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 			return false;
 		}
 		
-		if(args.length >= 1) {
+		if(args.length == 1 || args.length == 2) {
 			OfflinePlayer target = Utils.getPlayerFromUsername(args[0]);
 			if(target == null) {
 				Message.PLAYER_INVALID.send(sender, args[0]);
@@ -40,7 +40,7 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 			}
 			
 			double points;
-			if(args.length >= 2) {
+			if(args.length == 2) {
 				try {
 					points = Double.valueOf(args[1]);
 				} catch(NumberFormatException ex) {
@@ -90,8 +90,10 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 				sendDisplayMessage(sender, sender.getName(), points);
 			}
 			return true;
+		} else {
+			sendHelpMessage(sender);
+			return false;
 		}
-		return false;
 	}
 	
 	protected abstract double getPoints();
@@ -103,6 +105,8 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 	protected abstract void sendAnonymousMessage(CommandSender sender, double points);
 	
 	protected abstract void sendCooldownMessage(CommandSender sender, String formattedTime);
+	
+	protected abstract void sendHelpMessage(CommandSender sender);
 	
 	@Override
 	protected void start(BukkitRunnable runnable) {
