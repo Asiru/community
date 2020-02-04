@@ -7,8 +7,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public enum Message {
 	NO_PERMISSION("&cYou do not have permssion for %s."),
+	PLAYER_ONLY("&cThis command is for players only."),
 	PLAYER_INVALID("&cCannot find player called \'%s\'."),
 	PLAYER_SELF("&cYou cannot target yourself."),
+	SCORE_CHECK("&6Community score of &e%s&6: &e%s"),
 	PUNISH_COOLDOWN("&cYou cannot give another community punishment for %s."),
 	PUNISH_MESSAGE("&c%s &6has removed &c%d &6of your community points!"),
 	PUNISH_ANONYMOUS("&6You have lost &c%d &6community points!"),

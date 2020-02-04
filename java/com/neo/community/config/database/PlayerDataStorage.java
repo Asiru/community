@@ -11,13 +11,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Listener {
-	private static final DecimalFormat DF_POINTS = new DecimalFormat("0.##");
 	private static final int SAVE_PERIOD = 5; // minutes
 	
 	private Map<String, Player> onlinePlayers;
@@ -43,7 +41,7 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 			currentEntry.setScore(plugin.getSettings().getFirstLoginPoints());
 			
 			// message for first login
-			String points = DF_POINTS.format(plugin.getSettings().getFirstLoginPoints());
+			String points = Utils.formatPoints(plugin.getSettings().getFirstLoginPoints());
 			Message.FIRST_LOGIN.sendDelayed(plugin, delay, player, points);
 			
 			save = true;
@@ -57,7 +55,7 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 			currentEntry.setScore(currentEntry.getScore() + plugin.getSettings().getDailyLoginPoints());
 			
 			// message for logging in today
-			String points = DF_POINTS.format(plugin.getSettings().getDailyLoginPoints());
+			String points = Utils.formatPoints(plugin.getSettings().getDailyLoginPoints());
 			Message.DAILY_LOGIN.sendDelayed(plugin, save ? delay : (delay * 2), player, points);
 			
 			save = true;

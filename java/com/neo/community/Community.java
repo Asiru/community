@@ -1,6 +1,7 @@
 package com.neo.community;
 
 import com.earth2me.essentials.Essentials;
+import com.neo.community.command.CommunityExecutor;
 import com.neo.community.command.PunishExecutor;
 import com.neo.community.command.RewardExecutor;
 import com.neo.community.config.Settings;
@@ -30,6 +31,7 @@ public final class Community extends JavaPlugin {
 		registerListener(playerDataStorage);
 		registerListener(new PlayerListener(this));
 		
+		registerCommand("community", new CommunityExecutor(this));
 		registerCommand("reward", new RewardExecutor(this));
 		registerCommand("punish", new PunishExecutor(this));
 		

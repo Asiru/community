@@ -6,11 +6,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class Utils {
+	private static final DecimalFormat DF_POINTS = new DecimalFormat("0.##");
+	
 	public static long getStartOfCurrentDay() {
 		ZonedDateTime startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault());
 		return startOfToday.toEpochSecond();
@@ -75,5 +78,9 @@ public class Utils {
 		}
 		
 		return builder.toString();
+	}
+	
+	public static String formatPoints(double points) {
+		return DF_POINTS.format(points);
 	}
 }

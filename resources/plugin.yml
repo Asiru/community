@@ -7,11 +7,20 @@ authors: [Neo]
 softdepend: [Essentials, NuVotifier]
 prefix: Community
 commands:
+  community:
+    description: Check a player's community score!
   reward:
     description: Reward a player with community points!
   punish:
     description: Remove a player's community points!
 permissions:
+  community.self:
+    description: Allows a player to check their own community score.
+    default: true
+  community.check:
+    description: Allows a player to check other players' current community scores.
+    children:
+      community.self: true
   community.reward:
     description: Allows a player to reward other players with the default amount of community points.
   community.reward.bypass:
