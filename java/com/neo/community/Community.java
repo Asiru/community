@@ -17,6 +17,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
 public final class Community extends JavaPlugin {
+	public static final boolean DEBUG = true;
+	
 	private Settings settings;
 	private EssentialsHook essentialsHook;
 	private PlayerDataStorage playerDataStorage;

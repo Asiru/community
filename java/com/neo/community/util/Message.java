@@ -6,7 +6,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public enum Message {
-	NO_PERMISSION("&cYou do not have permssion for %s."),
+	NO_PERMISSION("&cYou do not have permission for %s."),
 	PLAYER_ONLY("&cThis command is for players only."),
 	PLAYER_INVALID("&cCannot find player called \'%s\'."),
 	PLAYER_SELF("&cYou cannot target yourself."),

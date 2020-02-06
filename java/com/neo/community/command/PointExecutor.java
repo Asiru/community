@@ -34,7 +34,7 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 				return false;
 			}
 			
-			if(target.equals(sender)) {
+			if(target.equals(sender) && !Community.DEBUG) {
 				Message.PLAYER_SELF.send(sender);
 				return false;
 			}
