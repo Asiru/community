@@ -1,7 +1,6 @@
 package com.neo.community.command;
 
 import com.neo.community.Community;
-import com.neo.community.config.database.ScoreEntry;
 import com.neo.community.util.Message;
 import com.neo.community.util.Utils;
 import org.bukkit.OfflinePlayer;
@@ -46,8 +45,8 @@ public class CommunityExecutor implements CommandExecutor {
 			return false;
 		}
 		
-		ScoreEntry scoreEntry = plugin.getPlayerDataStorage().get(player.getUniqueId().toString());
-		Message.SCORE_CHECK.send(sender, player.getName(), Utils.formatPoints(scoreEntry.getScore()));
+		double score = plugin.getPlayerDataStorage().getScore(player.getUniqueId().toString());
+		Message.SCORE_CHECK.send(sender, player.getName(), Utils.formatPoints(score));
 		return true;
 	}
 }

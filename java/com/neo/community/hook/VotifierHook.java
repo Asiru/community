@@ -1,8 +1,6 @@
 package com.neo.community.hook;
 
 import com.neo.community.Community;
-import com.neo.community.config.database.PlayerDataStorage;
-import com.neo.community.config.database.ScoreEntry;
 import com.neo.community.util.Utils;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
@@ -23,10 +21,8 @@ public class VotifierHook implements Listener {
 		Vote vote = event.getVote();
 		OfflinePlayer player = Utils.getPlayerFromUsername(vote.getUsername());
 		if(player != null) {
-			PlayerDataStorage pds = plugin.getPlayerDataStorage();
-			ScoreEntry currentEntry = pds.get(player.getUniqueId().toString());
-			double currentScore = currentEntry.getScore();
-			currentEntry.setScore(currentScore + plugin.getSettings().getPointsOnVote());
+			String key = player.getUniqueId().toString();
+			plugin.getPlayerDataStorage().addScore(key, plugin.getSettings().getPointsOnVote());
 		}
 	}
 }

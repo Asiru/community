@@ -15,17 +15,17 @@ public abstract class StorageAccessor<E extends StorageEntry> extends ConfigAcce
 		load();
 	}
 	
-	public void put(E entry) {
+	void put(E entry) {
 		entries.put(entry.getKey(), entry);
 		config.set(entry.getKey(), entry.getData());
 	}
 	
-	public void remove(String key) {
+	void remove(String key) {
 		entries.remove(key);
 		config.set(key, null);
 	}
 	
-	public E get(String key) {
+	E get(String key) {
 		return entries.get(key);
 	}
 	

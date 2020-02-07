@@ -1,7 +1,6 @@
 package com.neo.community.command;
 
 import com.neo.community.Community;
-import com.neo.community.config.database.ScoreEntry;
 import com.neo.community.manager.CooldownManager;
 import com.neo.community.util.Message;
 import com.neo.community.util.Utils;
@@ -82,8 +81,8 @@ public abstract class PointExecutor extends CooldownManager<OfflinePlayer> imple
 				}
 			}
 			
-			ScoreEntry scoreEntry = plugin.getPlayerDataStorage().get(target.getUniqueId().toString());
-			scoreEntry.setScore(scoreEntry.getScore() + points);
+			String key = target.getUniqueId().toString();
+			plugin.getPlayerDataStorage().addScore(key, points);
 			if(sender.hasPermission("community." + mode.name + ".anonymous")) {
 				sendAnonymousMessage(sender, points);
 			} else {

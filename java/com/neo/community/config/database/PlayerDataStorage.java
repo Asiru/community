@@ -85,6 +85,20 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 		super.saveConfig();
 	}
 	
+	public double getScore(String key) {
+		ScoreEntry entry = get(key);
+		if(entry == null)
+			return 0;
+		return entry.getScore();
+	}
+	
+	public void addScore(String key, double amount) {
+		ScoreEntry entry = get(key);
+		if(entry != null) {
+			entry.setScore(entry.getScore() + amount);
+		}
+	}
+	
 	@Override
 	protected ScoreEntry createEntry(String key, String dataString) {
 		StringTokenizer tokenizer = new StringTokenizer(dataString, " ");
