@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
 public final class Community extends JavaPlugin {
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
 	private Settings settings;
 	private EssentialsHook essentialsHook;
