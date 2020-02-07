@@ -32,7 +32,7 @@ public class PlayerListener implements Listener {
 		String format = event.getFormat();
 		String key = event.getPlayer().getUniqueId().toString();
 		double score = plugin.getPlayerDataStorage().getScore(key);
-		format = format.replace("{SCORE}", Utils.formatPoints(score));
+		format = format.replace("{COMMUNITY}", Utils.formatPoints(score));
 		event.setFormat(format);
 	}
 }
