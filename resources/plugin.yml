@@ -1,6 +1,6 @@
 main: com.neo.community.Community
 name: Community
-version: 1.1.6-beta
+version: 1.1.7-beta
 description: Give your players a community rating!
 api-version: 1.13
 authors: [Neo]

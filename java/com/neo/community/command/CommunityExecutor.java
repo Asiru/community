@@ -36,6 +36,11 @@ public class CommunityExecutor implements CommandExecutor {
 		else if(args.length == 1) {
 			player = Utils.getPlayerFromUsername(args[0]);
 			
+			if(player != sender && !sender.hasPermission("community.check")) {
+				Message.NO_PERMISSION.send(sender, "checking others' community scores");
+				return false;
+			}
+			
 			if(player == null) {
 				Message.PLAYER_INVALID.send(sender, args[0]);
 				return false;

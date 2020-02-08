@@ -21,12 +21,12 @@ public class PunishExecutor extends PointExecutor {
 	
 	@Override
 	protected void sendDisplayMessage(CommandSender sender, String name, double points) {
-		Message.PUNISH_MESSAGE.send(sender, name, points);
+		Message.PUNISH_MESSAGE.send(sender, name, points * -1);
 	}
 	
 	@Override
 	protected void sendAnonymousMessage(CommandSender sender, double points) {
-		Message.PUNISH_ANONYMOUS.send(sender, points);
+		Message.PUNISH_ANONYMOUS.send(sender, points * -1);
 	}
 	
 	@Override
