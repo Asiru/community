@@ -3,6 +3,7 @@ package com.neo.community.config.database;
 import com.neo.community.Community;
 import com.neo.community.config.ConfigAccessor;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,18 +16,22 @@ public abstract class StorageAccessor<E extends StorageEntry> extends ConfigAcce
 		load();
 	}
 	
-	void put(E entry) {
+	final void put(E entry) {
 		entries.put(entry.getKey(), entry);
 		config.set(entry.getKey(), entry.getData());
 	}
 	
-	void remove(String key) {
+	final void remove(String key) {
 		entries.remove(key);
 		config.set(key, null);
 	}
 	
-	E get(String key) {
+	final E get(String key) {
 		return entries.get(key);
+	}
+	
+	final Collection<E> values() {
+		return entries.values();
 	}
 	
 	private void load() {

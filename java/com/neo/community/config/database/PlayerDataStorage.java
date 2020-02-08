@@ -11,18 +11,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Listener {
 	private static final int SAVE_PERIOD = 5; // minutes
 	
+	private List<ScoreEntry> sortedEntries;
 	private Map<String, Player> onlinePlayers;
 	private ActivityRunnable activityRunnable;
 	
 	public PlayerDataStorage(Community plugin) {
 		super(plugin, "playerdata.yml");
+		this.sortedEntries = new ArrayList<>(values());
 		this.onlinePlayers = new HashMap<>();
 		this.activityRunnable = new ActivityRunnable();
 	}
@@ -44,6 +44,7 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 			String points = Utils.formatPoints(plugin.getSettings().getFirstLoginPoints());
 			Message.FIRST_LOGIN.sendDelayed(plugin, delay, player, points);
 			
+			sortedEntries.add(currentEntry);
 			save = true;
 		}
 		
@@ -63,6 +64,7 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 		
 		if(save) {
 			put(currentEntry);
+			sort();
 			saveConfig();
 		}
 	}
@@ -96,7 +98,18 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 		ScoreEntry entry = get(key);
 		if(entry != null) {
 			entry.setScore(entry.getScore() + amount);
+			sort();
 		}
+	}
+	
+	public ScoreEntry getEntry(int index) {
+		ScoreEntry entry;
+		try {
+			entry = sortedEntries.get(index);
+		} catch (Exception ex) {
+			return null;
+		}
+		return entry;
 	}
 	
 	@Override
@@ -112,6 +125,10 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 			result.setLastDayOnline(Long.valueOf(tokenizer.nextToken()));
 		
 		return result;
+	}
+	
+	private void sort() {
+		Collections.sort(sortedEntries);
 	}
 	
 	private class ActivityRunnable extends BukkitRunnable {
@@ -150,6 +167,9 @@ public class PlayerDataStorage extends StorageAccessor<ScoreEntry> implements Li
 				
 				put(currentEntry);
 			}
+			sort();
+			
+			// save every SAVE_PERIOD minutes
 			if(minutesElapsed >= SAVE_PERIOD) {
 				minutesElapsed = 0;
 				saveConfig();

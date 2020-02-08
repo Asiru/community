@@ -7,6 +7,7 @@ import com.neo.community.command.RewardExecutor;
 import com.neo.community.config.Settings;
 import com.neo.community.config.database.PlayerDataStorage;
 import com.neo.community.hook.EssentialsHook;
+import com.neo.community.hook.PlaceholderApiHook;
 import com.neo.community.hook.VotifierHook;
 import com.neo.community.manager.PlayerListener;
 import org.bukkit.Bukkit;
@@ -27,6 +28,11 @@ public final class Community extends JavaPlugin {
 	public void onEnable() {
 		settings = new Settings(this);
 		essentialsHook = connectEssentials();
+		PlaceholderApiHook placeholderApiHook = connectPlaceholderApi();
+		if(placeholderApiHook != null) {
+			placeholderApiHook.register();
+		}
+		
 		playerDataStorage = new PlayerDataStorage(this);
 		
 		registerListener(connectVotifier());
@@ -75,6 +81,13 @@ public final class Community extends JavaPlugin {
 	private VotifierHook connectVotifier() {
 		if(Bukkit.getPluginManager().isPluginEnabled("NuVotifier")) {
 			return new VotifierHook(this);
+		}
+		return null;
+	}
+	
+	private PlaceholderApiHook connectPlaceholderApi() {
+		if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+			return new PlaceholderApiHook(this);
 		}
 		return null;
 	}
