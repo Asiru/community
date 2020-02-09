@@ -5,6 +5,7 @@ import com.neo.community.config.database.ScoreEntry;
 import com.neo.community.util.Utils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public class PlaceholderApiHook extends PlaceholderExpansion {
 	private static final String IDENTIFIER = "community";
@@ -15,8 +16,9 @@ public class PlaceholderApiHook extends PlaceholderExpansion {
 		this.plugin = plugin;
 	}
 	
-	private String handleRequest(OfflinePlayer p, String identifier) {
-		if(identifier.equals("score")) {
+	@Override
+	public String onPlaceholderRequest(Player p, String identifier) {
+		if(identifier.equals("score") && p != null) {
 			String key = p.getUniqueId().toString();
 			return Utils.formatPoints(plugin.getPlayerDataStorage().getScore(key));
 		} else if(identifier.startsWith("topscore")) {
@@ -29,11 +31,11 @@ public class PlaceholderApiHook extends PlaceholderExpansion {
 				
 				ScoreEntry entry = plugin.getPlayerDataStorage().getEntry(index - 1);
 				if(entry == null) {
-					return "empty";
+					return "0";
 				}
 				return Utils.formatPoints(entry.getScore());
 			} catch(NumberFormatException ex) {
-				return "invalid index";
+				return "0";
 			}
 		} else if(identifier.startsWith("topplayer")) {
 			identifier = identifier.replace("topplayer", "");
@@ -45,24 +47,19 @@ public class PlaceholderApiHook extends PlaceholderExpansion {
 				
 				ScoreEntry entry = plugin.getPlayerDataStorage().getEntry(index - 1);
 				if(entry == null) {
-					return "empty";
+					return "None";
 				}
 				OfflinePlayer target = Utils.getPlayerFromUsername(entry.getKey());
 				if(target == null) {
-					return "invalid player";
+					return "None";
 				} else {
 					return target.getName();
 				}
 			} catch(NumberFormatException ex) {
-				return "invalid index";
+				return "None";
 			}
 		}
 		return null;
-	}
-	
-	@Override
-	public String onRequest(OfflinePlayer p, String identifier) {
-		return handleRequest(p, identifier);
 	}
 	
 	@Override
